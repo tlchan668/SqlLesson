@@ -11,6 +11,10 @@ namespace SqlLesson {
             var student = new Student(sqllib);
             var students = student.GetAllStudents();
 
+            foreach(var stud in students) {
+                Console.WriteLine($"student id {stud.Id}, name {stud.Firstname} {stud.Lastname}");
+            }
+
             sqllib.Disconnect();
         }
     }
