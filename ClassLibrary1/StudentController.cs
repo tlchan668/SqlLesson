@@ -8,6 +8,16 @@ namespace SqlLibrary {
 
         public static BcConnection bcConnection { get; set; }
 
+        private static Student LoadStudentInstance(SqlDataReader reader) {
+            var student = new Student();
+            student.Id = Convert.ToInt32(reader["Id"]);//gives value as string
+            student.Firstname = reader["Firstname"].ToString();
+            student.Lastname = reader["Lastname"].ToString();
+            student.SAT = Convert.ToInt32(reader["SAT"]);
+            student.GPA = Convert.ToDouble(reader["GPA"]);
+            // student.MajorId = Convert.ToInt32(reader["MajorId"]);
+            return student;
+        }
         //create a method to get all students
         public static List<Student> GetAllStudents() {
             //issue a sql statment to give all students
@@ -27,12 +37,13 @@ namespace SqlLibrary {
             var students = new List<Student>();
             while (reader.Read()) {
                 //while getting next row keep on
-                var student = new Student();
+                var student = LoadStudentInstance(reader);
+                /*var student = new Student();
                 student.Id = Convert.ToInt32(reader["Id"]);//gives value as string
                 student.Firstname = reader["Firstname"].ToString();
                 student.Lastname = reader["Lastname"].ToString();
                 student.SAT = Convert.ToInt32(reader["SAT"]);
-                student.GPA = Convert.ToDouble(reader["GPA"]);
+                student.GPA = Convert.ToDouble(reader["GPA"]);*/
                 // student.MajorId = Convert.ToInt32(reader["MajorId"]);
                 if (Convert.IsDBNull(reader["Description"])) {
                     student.Major = null;
@@ -62,13 +73,14 @@ namespace SqlLibrary {
                 return null;
             }
             reader.Read();
-            var student = new Student();
+            var student= LoadStudentInstance(reader);
+            /*var student = new Student();
             student.Id = Convert.ToInt32(reader["Id"]);//gives value as string
             student.Firstname = reader["Firstname"].ToString();
             student.Lastname = reader["Lastname"].ToString();
             student.SAT = Convert.ToInt32(reader["SAT"]);
             student.GPA = Convert.ToDouble(reader["GPA"]);
-            // student.MajorId = Convert.ToInt32(reader["MajorId"]);
+            // student.MajorId = Convert.ToInt32(reader["MajorId"]);*/
             reader.Close();
             reader = null; 
             return student;

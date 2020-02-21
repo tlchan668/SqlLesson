@@ -11,6 +11,8 @@ namespace SqlLibrary {
         public override string ToString() {
             return $"{Id}|{Description}|{MinSat}";
         }
+
+       
     }
 
     
