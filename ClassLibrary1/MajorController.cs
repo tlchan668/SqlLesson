@@ -84,7 +84,7 @@ namespace SqlLibrary {
             command.Parameters.AddWithValue("@MinSat", major.MinSat);
             var recsAffected = command.ExecuteNonQuery();
             if (recsAffected != 1) {
-                throw new Exception("Major Insert failed");
+                throw new Exception("Major Update failed");
             }
             return true;
         }
